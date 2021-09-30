@@ -1,40 +1,27 @@
 package com.craig.pe.ptbackend.security.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
-    @NotNull
     private String username;
-    @NotNull
     private String password;
-    @NotNull
-    private String email;
 
-    @ManyToMany
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Role> roles = new HashSet<>();
-
-    public User(String name, String username, String password, String email) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role>roles=new ArrayList<>();
 }

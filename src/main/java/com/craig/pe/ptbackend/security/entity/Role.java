@@ -1,27 +1,23 @@
 package com.craig.pe.ptbackend.security.entity;
 
-
-import com.craig.pe.ptbackend.security.enums.RoleName;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Getter
 @Setter
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private RoleName rolName;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
+    private String name;
 
-    public Role(RoleName rolName) {
-        this.rolName = rolName;
-    }
 
 }
